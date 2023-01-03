@@ -1,25 +1,28 @@
 <template>
-  <div id="app">
-    <Tinder ref="tinder" key-name="id" :queue.sync="queue" :offset-y="10" @submit="onSubmit">
-      <template slot-scope="scope">
-        <div
-          class="pic"
-          :style="{
-            'background-image': `url(https://cn.bing.com//th?id=OHR.${scope.data.id}_UHD.jpg&pid=hp&w=720&h=1280&rs=1&c=4&r=0)`
-          }"
-        />
-      </template>
-      <img class="like-pointer" slot="like" src="./assets/like-txt.png">
-      <img class="nope-pointer" slot="nope" src="./assets/nope-txt.png">
-      <img class="super-pointer" slot="super" src="./assets/super-txt.png">
-      <img class="rewind-pointer" slot="rewind" src="./assets/rewind-txt.png">
-    </Tinder>
-    <div class="btns">
-      <img src="./assets/rewind.png" @click="decide('rewind')">
-      <img src="./assets/nope.png" @click="decide('nope')">
-      <img src="./assets/super-like.png" @click="decide('super')">
-      <img src="./assets/like.png" @click="decide('like')">
-      <img src="./assets/help.png" @click="decide('help')">
+  <div class="wrapper">
+    <div class="container">
+      <Tinder ref="tinder" key-name="id" :queue.sync="queue" :offset-y="10" @submit="onSubmit">
+        <template slot-scope="scope">
+          <div class="pic-wrapper" :style="{
+  'background-image': `url(https://cn.bing.com//th?id=OHR.${scope.data.id}_UHD.jpg&pid=hp&w=720&h=1280&rs=1&c=4&r=0)`
+}">
+
+            <div class="card-text">
+              <h1>Hallo Welt</h1>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
+              invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo
+              dolores et ea rebum.
+            </div>
+          </div>
+        </template>
+      </Tinder>
+      <div class="btns
+    ">
+        <img src="./assets/rewind.png" @click="decide('rewind')">
+        <img src="./assets/nope.png" @click="decide('nope')">
+        <img src="./assets/super-like.png" @click="decide('super')">
+        <img src="./assets/like.png" @click="decide('like')">
+        <img src="./assets/help.png" @click="decide('help')">
+      </div>
     </div>
   </div>
 </template>
@@ -54,7 +57,7 @@ export default {
     },
     onSubmit({ item }) {
       if (this.queue.length < 3) {
-        this.mock();
+       // this.mock();
       }
       this.history.push(item);
     },
@@ -77,83 +80,65 @@ export default {
 html,
 body {
   height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
   margin: 0;
-  background-color: #20262e;
-  overflow: hidden;
+  background-color: #efefef;
 }
 
-#app .vue-tinder {
-  position: absolute;
-  z-index: 1;
-  left: 0;
-  right: 0;
-  top: 23px;
-  margin: auto;
-  width: calc(100% - 20px);
-  height: calc(100% - 23px - 65px - 47px - 16px);
+.wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  height: 90%;
+  max-height: 1800px;
+  min-height: 600px;
+  aspect-ratio: 9/16;
+  display: flex;
+  flex-direction: column;
+}
+
+.vue-tinder {
+  height: 100%;
+  width: 100%;
+  margin-bottom: 40px;
+  flex-grow: 1;
+}
+
+.btns {
   min-width: 300px;
   max-width: 355px;
+  margin: 0 auto;
 }
 
-.nope-pointer,
-.like-pointer {
-  position: absolute;
-  z-index: 1;
-  top: 20px;
-  width: 64px;
-  height: 64px;
-}
-
-.nope-pointer {
-  right: 10px;
-}
-
-.like-pointer {
-  left: 10px;
-}
-
-.super-pointer {
-  position: absolute;
-  z-index: 1;
-  bottom: 80px;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 112px;
-  height: 78px;
-}
-
-.rewind-pointer {
-  position: absolute;
-  z-index: 1;
-  top: 20px;
-  right: 10px;
-  width: 112px;
-  height: 78px;
-}
-
-.pic {
+.pic-wrapper {
   width: 100%;
   height: 100%;
   background-size: cover;
   background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
-.btns {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 30px;
-  margin: auto;
-  height: 65px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 300px;
-  max-width: 355px;
+.card-text {
+  color: white;
+  height: 200px;
+  padding: 0 25px;
+  text-shadow: black 0px 0px 5px;
+}
+
+h1 {
+  padding: 0 0 8px 0;
+  margin: 0;
+  font-size: 1.5rem;
 }
 
 .btns img {
